@@ -1,0 +1,5 @@
+﻿{
+	"ClientId": "<client_id>",
+	"ClientSecret": "<client_secret>",
+	"ApiKey": "<api_key>"
+}

@@ -55,6 +55,9 @@ namespace EventMapper
                     //TODO: Load state from previously suspended application
                 }
 
+                var bootstrapper = new Bootstrapper();
+                bootstrapper.Start();
+
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }

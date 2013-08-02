@@ -1,42 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-
-  <Identity Name="d7bbedad-0689-4086-863b-4c8fd81ee0bb"
-            Publisher="CN=Noam"
-            Version="1.0.0.0" />
-
+  <Identity Name="d7bbedad-0689-4086-863b-4c8fd81ee0bb" Publisher="CN=Noam" Version="1.0.0.0" />
   <Properties>
     <DisplayName>EventMapper</DisplayName>
     <PublisherDisplayName>Noam</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
     <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="EventMapper.App">
-        <VisualElements
-            DisplayName="EventMapper"
-            Logo="Assets\Logo.png"
-            SmallLogo="Assets\SmallLogo.png"
-            Description="EventMapper"
-            ForegroundText="light"
-            BackgroundColor="#464646">
-            <DefaultTile ShowName="allLogos" />
-            <SplashScreen Image="Assets\SplashScreen.png" />
-        </VisualElements>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="EventMapper.App">
+      <VisualElements DisplayName="EventMapper" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="EventMapper" ForegroundText="light" BackgroundColor="#464646">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="privateNetworkClientServer" />
     <Capability Name="internetClient" />
   </Capabilities>
 </Package>
