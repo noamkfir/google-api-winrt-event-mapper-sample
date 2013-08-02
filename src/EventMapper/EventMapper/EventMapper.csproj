@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F4A375BF-FFDD-4582-9790-FE5E224A669C}</ProjectGuid>
-    <OutputType>appcontainerexe</OutputType>
+    <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EventMapper</RootNamespace>
     <AssemblyName>EventMapper</AssemblyName>
@@ -104,6 +104,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\Authenticator.cs" />
+    <Compile Include="Authentication\GoogleCodes.cs" />
+    <Compile Include="Authentication\Token.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="EnumCollections.cs" />
     <Compile Include="EventCreationManager.cs" />
     <Compile Include="GooglePlusViewModel.cs" />
@@ -126,13 +130,17 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="EventMapper_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\GoogleCodes.json">
     <Content Include="Common\ReadMe.txt" />
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -150,7 +158,28 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.Apis">
-      <HintPath>..\..\..\Import\Google.Apis.dll</HintPath>
+      <HintPath>..\packages\Google.Apis.1.4.0-beta\lib\portable-net4+sl4+wp71+win8\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Calendar.v3">
+      <HintPath>..\..\..\..\shovavnik-google-api-dotnet-client-samples\Services\Google.Apis.Calendar.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\win8\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\win8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\win8\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\win8\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Zlib.Portable">
+      <HintPath>..\packages\Zlib.Portable.1.9.2\lib\portable-net4+sl4+wp71+win8\Zlib.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Plus.v1">
       <HintPath>..\..\..\Import\Google.Apis.Plus.v1.dll</HintPath>
@@ -179,6 +208,7 @@
     <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
