@@ -1,15 +1,6 @@
-﻿using DotNetOpenAuth.OAuth2;
-using Google.Apis.Authentication.OAuth2;
-using Google.Apis.Authentication.OAuth2.DotNetOpenAuth;
-using Google.Apis.Plus.v1;
-using Google.Apis.Samples.Helper;
-using Google.Apis.Services;
-using Google.Apis.Util;
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace GooglePlusSample
 {
@@ -49,62 +40,62 @@ namespace GooglePlusSample
 
         private void InitAuthentication()
         {
-            Task.Factory.StartNew(() =>
-            {
-                var provider = new NativeApplicationClient(GoogleAuthenticationServer.Description)
-                {
-                    ClientIdentifier = "954413084569.apps.googleusercontent.com",
-                    ClientSecret = "eIVrjsMOOF6NKzvvmcFTntYq"
-                };
-                var auth = new OAuth2Authenticator<NativeApplicationClient>(provider, GetAuthorization);
+            //Task.Factory.StartNew(() =>
+            //{
+            //    var provider = new NativeApplicationClient(GoogleAuthenticationServer.Description)
+            //    {
+            //        ClientIdentifier = "954413084569.apps.googleusercontent.com",
+            //        ClientSecret = "eIVrjsMOOF6NKzvvmcFTntYq"
+            //    };
+            //    var auth = new OAuth2Authenticator<NativeApplicationClient>(provider, GetAuthorization);
 
 
-                PlusService service = new PlusService(new BaseClientService.Initializer()
-                {
-                    Authenticator = auth,
-                    ApplicationName = "Plus API Sample",
-                });
+            //    PlusService service = new PlusService(new BaseClientService.Initializer()
+            //    {
+            //        Authenticator = auth,
+            //        ApplicationName = "Plus API Sample",
+            //    });
 
-                // Create and execute the request.
-                var request = service.People.List("me", PeopleResource.CollectionEnum.Visible);
-                var peopleFeed = request.Execute();
+            //    // Create and execute the request.
+            //    var request = service.People.List("me", PeopleResource.CollectionEnum.Visible);
+            //    var peopleFeed = request.Execute();
 
-                // List all items on this page.
-                if (peopleFeed.Items != null && peopleFeed.Items.Any())
-                {
-                    _plusContactsManager.SetPersonsList(peopleFeed.Items);
-                }
-            });
+            //    // List all items on this page.
+            //    if (peopleFeed.Items != null && peopleFeed.Items.Any())
+            //    {
+            //        _plusContactsManager.SetPersonsList(peopleFeed.Items);
+            //    }
+            //});
         }
 
-        private IAuthorizationState GetAuthorization(NativeApplicationClient client)
-        {
-            // You should use a more secure way of storing the key here as
-            // .NET applications can be disassembled using a reflection tool.
-            const string STORAGE = "GooglePlusTesting";
-            const string KEY = "AIzaSyAEcnXQ1gkfpRo5WWCD_6CBdwsVhotCdt0";
+//        private IAuthorizationState GetAuthorization(NativeApplicationClient client)
+//        {
+//            // You should use a more secure way of storing the key here as
+//            // .NET applications can be disassembled using a reflection tool.
+//            const string STORAGE = "GooglePlusTesting";
+//            const string KEY = "AIzaSyAEcnXQ1gkfpRo5WWCD_6CBdwsVhotCdt0";
 
-            // Check if there is a cached refresh token available.
-            IAuthorizationState state = AuthorizationMgr.GetCachedRefreshToken(STORAGE, KEY);
-            if (state != null)
-            {
-                try
-                {
-                    client.RefreshToken(state);
-                    return state; // Yes - we are done.
-                }
-                catch (DotNetOpenAuth.Messaging.ProtocolException ex)
-                {
-                    //CommandLine.WriteError("Using existing refresh token failed: " + ex.Message);
-                }
-            }
+//            // Check if there is a cached refresh token available.
+//            IAuthorizationState state = AuthorizationMgr.GetCachedRefreshToken(STORAGE, KEY);
+//            if (state != null)
+//            {
+//                try
+//                {
+//                    client.RefreshToken(state);
+//                    return state; // Yes - we are done.
+//                }
+//                catch (DotNetOpenAuth.Messaging.ProtocolException ex)
+//                {
+//                    //CommandLine.WriteError("Using existing refresh token failed: " + ex.Message);
+//                }
+//            }
 
-            // Retrieve the authorization from the user.
-            state = AuthorizationMgr.RequestNativeAuthorization(client, PlusService.Scopes.PlusLogin.GetStringValue()
-);//_scope.ToArray());
-            AuthorizationMgr.SetCachedRefreshToken(STORAGE, KEY, state);
-            return state;
-        }
+//            // Retrieve the authorization from the user.
+//            state = AuthorizationMgr.RequestNativeAuthorization(client, PlusService.Scopes.PlusLogin.GetStringValue()
+//);//_scope.ToArray());
+//            AuthorizationMgr.SetCachedRefreshToken(STORAGE, KEY, state);
+//            return state;
+//        }
 
         #endregion
 
