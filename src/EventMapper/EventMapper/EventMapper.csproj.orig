@@ -104,9 +104,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnumCollections.cs" />
-    <Compile Include="EventCreationManager.cs" />
-    <Compile Include="GooglePlusViewModel.cs" />
+<<<<<<< HEAD
     <Compile Include="CalendarViewModel.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
@@ -114,6 +112,11 @@
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+=======
+    <Compile Include="EnumCollections.cs" />
+    <Compile Include="EventCreationManager.cs" />
+    <Compile Include="GooglePlusViewModel.cs" />
+>>>>>>> e9e42962ab18d3ebf5bb7e6a1216494ed08a757b
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -152,9 +155,7 @@
     <Reference Include="Google.Apis">
       <HintPath>..\..\..\Import\Google.Apis.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Plus.v1">
-      <HintPath>..\..\..\Import\Google.Apis.Plus.v1.dll</HintPath>
-    </Reference>
+<<<<<<< HEAD
     <Reference Include="Google.Apis.Calendar.v3, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Import\Google.Apis.Calendar.v3.dll</HintPath>
@@ -170,6 +171,10 @@
     <Reference Include="System.Net.Http.Primitives, Version=4.2.13.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Import\System.Net.Http.Primitives.dll</HintPath>
+=======
+    <Reference Include="Google.Apis.Plus.v1">
+      <HintPath>..\..\..\Import\Google.Apis.Plus.v1.dll</HintPath>
+>>>>>>> e9e42962ab18d3ebf5bb7e6a1216494ed08a757b
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

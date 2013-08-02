@@ -1,0 +1,5 @@
+Google Maps API for .NET
+http://gmaps.codeplex.com/
+
+Google Map .Net Control
+http://sourceforge.net/projects/gmapdotnetctl/
