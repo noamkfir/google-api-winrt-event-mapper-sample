@@ -142,7 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.Apis">
-      <HintPath>..\..\..\Import\Google API\Google.Apis.dll</HintPath>
+      <HintPath>..\..\..\Import\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Plus.v1">
+      <HintPath>..\..\..\Import\Google.Apis.Plus.v1.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
