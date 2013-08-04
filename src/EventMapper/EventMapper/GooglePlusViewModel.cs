@@ -6,21 +6,11 @@ namespace GooglePlusSample
 {
     public class GooglePlusViewModel : INotifyPropertyChanged
     {
-        #region fields
-
         PlusContactsManager _plusContactsManager = new PlusContactsManager();
         EventCreationManager _eventCreationManager = new EventCreationManager();
 
-        #endregion
-
-        #region proerpties
-
         public PlusContactsManager PlusContactsManager { get { return _plusContactsManager; } }
         public EventCreationManager EventCreationManager { get { return _eventCreationManager; } }
-
-        #endregion
-
-        #region ctor
 
         public GooglePlusViewModel()
         {
@@ -33,10 +23,6 @@ namespace GooglePlusSample
         {
             _eventCreationManager.SetSelectedPersons(_plusContactsManager.SelectedFriends);
         }
-
-        #endregion
-
-        #region private methods
 
         private void InitAuthentication()
         {
@@ -97,9 +83,6 @@ namespace GooglePlusSample
 //            return state;
 //        }
 
-        #endregion
-
-        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyOnPropertyChanged<T>(Expression<Func<T>> expression)
         {
@@ -113,6 +96,5 @@ namespace GooglePlusSample
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }

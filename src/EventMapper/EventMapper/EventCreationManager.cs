@@ -12,8 +12,6 @@ namespace GooglePlusSample
 {
     public class EventCreationManager : INotifyPropertyChanged
     {
-        #region fields
-
         private ICommand _removeSelectedCommand;
         private ICommand _addSelectedCommand;
         private ObservableCollection<PersonViewModel> _selectedFriends = new ObservableCollection<PersonViewModel>();
@@ -28,10 +26,6 @@ namespace GooglePlusSample
             {NotificationType.Email, NotificationType.Email.ToString()},
             {NotificationType.SMS, NotificationType.SMS.ToString()}
         };
-        
-        #endregion
-
-        #region properties
 
         public event AddSelectedHandler OnAddSelected;
 
@@ -68,10 +62,6 @@ namespace GooglePlusSample
             get { return _selectedFriends; }
         }
 
-        #endregion
-
-        #region public methods
-
         public void SetSelectedPersons(IEnumerable<PersonViewModel> personViewModels)
         {
             foreach (PersonViewModel viewModel in personViewModels)
@@ -81,10 +71,6 @@ namespace GooglePlusSample
                 viewModel.IsSelected = false;
             }
         }
-
-        #endregion
-
-        #region private methods
 
         private void RemoveSelectedCommandAction(PersonViewModel personViewModel)
         {
@@ -101,9 +87,6 @@ namespace GooglePlusSample
                 OnAddSelected();
         }
 
-        #endregion
-
-        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyOnPropertyChanged<T>(Expression<Func<T>> expression)
         {
@@ -117,7 +100,6 @@ namespace GooglePlusSample
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 
     public delegate void AddSelectedHandler();
