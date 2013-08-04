@@ -6,8 +6,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <local:CalendarViewModel x:Key="CalendarViewModel"/>
+        <DataTemplate x:Key="CalendarListTemplate">
+            <Grid Height="110" Margin="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{Binding BackgroundColor}" Width="110" Height="110" Opacity="0.7"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                    <TextBlock Text="{Binding Summary}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="{Binding Id}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" DataContext="{StaticResource CalendarViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock 
+            Text="Events" 
+            Style="{StaticResource HeaderTextStyle}"
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+        <ListView
+            Margin="13"
+            Grid.Column="0"
+            Grid.Row="1"
+            x:Name="CalendersListView"
+            ItemsSource="{Binding Calendars}"
+            ItemTemplate="{StaticResource CalendarListTemplate}"/>
     </Grid>
 </Page>
