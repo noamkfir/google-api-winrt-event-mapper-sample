@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace EventMapper.Authentication
 {
-    internal class Authenticator
+    public class Authenticator
     {
         private const string GoogleApprovalAddress = "https://accounts.google.com/o/oauth2/approval";
         private const string GoogleCalendarScope = "https://www.googleapis.com/auth/calendar"; //  https://www.googleapis.com/auth/userinfo.id https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login https://www.google.com/accounts/OAuthLogin
@@ -27,6 +27,8 @@ namespace EventMapper.Authentication
         private const string VaultUserName = "USERNAME";
 
         private GoogleCodes _googleCodes;
+
+        public string AccessToken { get; private set; }
 
         //public async Task<string> AuthenticateAsync()
         //{
@@ -67,7 +69,7 @@ namespace EventMapper.Authentication
         //    return result;
         //}
 
-        public async Task<string> AuthenticateAsync(bool force)
+        public async Task AuthenticateAsync(bool force)
         {
             _googleCodes = await GoogleCodes.Load();
 
@@ -77,9 +79,7 @@ namespace EventMapper.Authentication
             if (refreshToken == null)
             {
                 var code = await GetCodeAsync();
-                //var a = await Post(code);
                 token = await GetAuthorizationTokenAsync(code);
-                //var token = await GetAuthorizationTokenAsync(responseData);
 
                 StoreRefreshToken(token.refresh_token);
             }
@@ -88,11 +88,7 @@ namespace EventMapper.Authentication
                 token = await GetAccessToken(refreshToken);
             }
 
-            return token == null ? null : token.access_token;
-
-            // get auth token
-
-            // 2nd request: get new access token using old refresh token
+            AccessToken = token == null ? null : token.access_token;
         }
 
         private async Task<Token> GetAccessToken(string refreshToken)

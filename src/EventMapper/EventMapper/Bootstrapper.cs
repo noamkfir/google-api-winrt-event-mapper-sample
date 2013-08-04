@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using EventMapper.Authentication;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Http;
@@ -13,12 +15,15 @@ namespace EventMapper
         public async void Start()
         {
             var authenticator = new Authenticator();
-            var accessToken = await authenticator.AuthenticateAsync(true);
+            await authenticator.AuthenticateAsync(true);
 
-            var calendars = await GetCalendars(accessToken);
+            await GetCalendars(authenticator.AccessToken);
+
+            var app = (App) Application.Current;
+            app.ServiceManager.Authenticator = authenticator;
         }
 
-        private async Task<string> GetCalendars(string accessToken)
+        private async Task GetCalendars(string accessToken)
         {
             var initializer = new BaseClientService.Initializer();
             var interceptor = new WinRTMessageAuthenticationInterceptor(accessToken);
@@ -30,11 +35,16 @@ namespace EventMapper
             var calendarService = new CalendarService(initializer);
             var calendarsResource = calendarService.CalendarList.List().Execute();
 
-            string address = "https://www.googleapis.com/oauth2/v1/use%rinfo?access_token=" + accessToken;
-            //var response = await httpClient.GetAsync(new Uri(address));
-            //var content = await response.Content.ReadAsStringAsync();
-            //return content;
-            return null;
+            var entries = calendarsResource.Items;
+            foreach (var entry in entries)
+            {
+                Debug.WriteLine(entry.Description);
+            }
+            //string address = "https://www.googleapis.com/oauth2/v1/use%rinfo?access_token=" + accessToken;
+            ////var response = await httpClient.GetAsync(new Uri(address));
+            ////var content = await response.Content.ReadAsStringAsync();
+            ////return content;
+            //return null;
         }
 
         private class WinRTMessageAuthenticationInterceptor : IHttpExecuteInterceptor, IConfigurableHttpClientInitializer

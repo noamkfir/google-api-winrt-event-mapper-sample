@@ -23,6 +23,8 @@ namespace EventMapper
     /// </summary>
     sealed partial class App : Application
     {
+        public ServiceManager ServiceManager { get; private set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -30,6 +32,9 @@ namespace EventMapper
         public App()
         {
             this.InitializeComponent();
+
+            this.ServiceManager = new ServiceManager();
+
             this.Suspending += OnSuspending;
         }
 
