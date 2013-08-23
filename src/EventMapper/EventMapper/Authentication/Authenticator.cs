@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.Security.Authentication.Web;
 using Windows.Security.Credentials;
 using Windows.Storage;
+
 using Newtonsoft.Json;
 
 namespace EventMapper.Authentication
